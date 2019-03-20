@@ -6,7 +6,7 @@ jobs:
         run: 
           command: |
               cd ~
-              git clone git@github.com:atshvrma/StudentService.git
+              git clone git@github.com:atshvrma/student-service.git
               cd StudentService
               mvn -DskipTests clean install
           name: "git clone private project"
@@ -17,7 +17,7 @@ jobs:
           name: "maven build"
       - 
         run: 
-          command: "docker build -t $CIRCLE_PROJECT_REPONAME ."
+          command : "docker build -t atshvrma/student-service:latest -f Dockerfile ./"
           name: "docker build"
       # - 
       #   run: 

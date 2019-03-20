@@ -23,9 +23,11 @@ ENV PATH $PATH:$JAVA_HOME/bin
 
 RUN java -version
 
-WORKDIR ~/StudentService
+WORKDIR ~/
 
-COPY target/StudentService-0.0.1-SNAPSHOT.jar app.jar
+RUN echo "$PWD"
+
+COPY target/student-service-0.0.1-SNAPSHOT.jar app.jar
 
 CMD ["java", "-jar", "app.jar"]
 
