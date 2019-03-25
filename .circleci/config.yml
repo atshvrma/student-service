@@ -23,9 +23,9 @@ jobs:
             curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
             unzip awscli-bundle.zip
             sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
-            
-            aws ecr get-login --region us-east-2 | sed 's|https://||'
-
+       - run:
+          name: "Log in to AWS ECR"
+          command: aws ecr get-login --region us-east-2 | sed 's|https://||'
       -
         run:
           name: "docker push"
