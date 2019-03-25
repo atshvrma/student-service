@@ -19,17 +19,11 @@ jobs:
         run: 
           name: "docker build"
           command : "docker build -t $CIRCLE_PROJECT_REPONAME -f Dockerfile ./"
-      - run:
-          name: Install awscli
-          command: |
-            python3 -m venv venv
-            . venv/bin/activate
-            pip install -r requirements.txt
       -
         run:
           command: |
-              docker build -t 846069253880.dkr.ecr.us-east-1.amazonaws.com/my-app:latest -t 846069253880.dkr.ecr.us-east-1.amazonaws.com/my-app:$CIRCLE_SHA1 ."
-              docker push 846069253880.dkr.ecr.us-east-1.amazonaws.com/my-app:$CIRCLE_SHA1
+              docker build -t 846069253880.dkr.ecr.us-east-2.amazonaws.com/student-service-repo:latest -t 846069253880.dkr.ecr.us-east-2.amazonaws.com/student-service-repo ."
+              docker push 846069253880.dkr.ecr.us-east-2.amazonaws.com/student-service-repo:$CIRCLE_SHA1
 
 
           # docker push 846069253880.dkr.ecr.us-west-2.amazonaws.com/studentservicerepo:$CIRCLE_SHA1"
