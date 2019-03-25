@@ -18,7 +18,7 @@ jobs:
       - run:
           name: install aws
           command: |
-            apt-get install python-dev libffi-dev libssl-dev
+            sudo apt-get install python-dev libffi-dev libssl-dev
             sudo apt-get install python-dev libffi-dev libssl-dev
             curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
             unzip awscli-bundle.zip
