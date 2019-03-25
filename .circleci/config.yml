@@ -18,7 +18,7 @@ jobs:
       - 
         run: 
           name: "login into aws"
-          command: "aws ecr get-login --no-include-email --region us-east-2 | sed 's|https://||'"
+          command: "eval $(aws ecr get-login --no-include-email --region us-east-2 | sed 's|https://||')"
       - run:
           name: install aws
           command: |
