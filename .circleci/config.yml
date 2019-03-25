@@ -27,8 +27,14 @@ jobs:
             pip install -r requirements.txt
       -
         run:
-          command: "docker push 846069253880.dkr.ecr.us-west-2.amazonaws.com/studentservicerepo:$CIRCLE_SHA1"
+          command: |
+              docker build -t 846069253880.dkr.ecr.us-east-1.amazonaws.com/my-app:latest -t 846069253880.dkr.ecr.us-east-1.amazonaws.com/my-app:$CIRCLE_SHA1 ."
+              docker push 846069253880.dkr.ecr.us-east-1.amazonaws.com/my-app:$CIRCLE_SHA1
+
+
+          # docker push 846069253880.dkr.ecr.us-west-2.amazonaws.com/studentservicerepo:$CIRCLE_SHA1"
           name: "docker push"
+
     working_directory: ~/build
 version: 2
 workflows: 
