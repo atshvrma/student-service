@@ -24,7 +24,7 @@ jobs:
             unzip awscli-bundle.zip
             sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
             
-            eval $(aws ecr get-login --region us-east-2 | sed 's|https://||') 
+            aws ecr get-login --region us-east-2 | sed 's|https://||'
 
       -
         run:
