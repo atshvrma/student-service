@@ -18,7 +18,7 @@ jobs:
       - 
         run: 
           name: "login into aws"
-          command: "eval $(aws ecr get-login --registry-ids 846069253880 --no-include-email --region us-east-2 | sed 's|https://||')"
+          command: "eval $(aws ecr get-login --registry-ids $AWS_ACCOUNT_ID --no-include-email --region us-east-2 | sed 's|https://||')"
       - run:
           name: install aws
           command: |
