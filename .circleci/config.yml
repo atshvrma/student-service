@@ -2,6 +2,18 @@ jobs:
   build: 
     machine: true
     steps: 
+      - run:
+          name: install aws
+          command: |
+            sudo apt-get install python-dev libffi-dev libssl-dev
+            pip install --upgrade ndg-httpsclient 
+            curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+            unzip awscli-bundle.zip
+            sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+      - 
+        run: 
+          name: "login into aws"
+          command: "aws ecr get-login --no-include-email --region us-east-2 | sed 's|https://||'"
       -
         run: 
           name: "git clone private project"
@@ -15,18 +27,7 @@ jobs:
         run: 
           name: "maven build"
           command: "mvn -DskipTests clean install dependency:resolve-plugins dependency:go-offline"
-      - run:
-          name: install aws
-          command: |
-            sudo apt-get install python-dev libffi-dev libssl-dev
-            pip install --upgrade ndg-httpsclient 
-            curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
-            unzip awscli-bundle.zip
-            sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
-      - 
-        run: 
-          name: "login into aws"
-          command: "aws ecr get-login --region us-east-2 | sed 's|https://||'"
+
       -
         run:
           name: "docker push"
