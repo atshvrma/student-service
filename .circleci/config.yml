@@ -17,14 +17,14 @@ jobs:
           command: "mvn -DskipTests clean install dependency:resolve-plugins dependency:go-offline"
       -
         run:
+          name:"authenticate aws"
+          command:"aws ecr get-login --region us-east-2"
+      -
+        run:
           name: "docker push"
           command: |
               docker build -t $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/student-service-repo:latest -t $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/student-service-repo ./
               docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/student-service-repo
-      -
-        run:
-          name:"authenticate aws"
-          command:"aws ecr get-login --region us-east-2"
               
     working_directory: ~/build
 version: 2
