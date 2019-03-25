@@ -50,6 +50,8 @@ jobs:
               # Tag and push docker image
               # docker tag app $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$DOCKER_IMAGE:$CIRCLE_SHA1
               # docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$DOCKER_IMAGE:$CIRCLE_SHA1
+              docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/student-service-repo:$CIRCLE_SHA1 ./
+              docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/student-service-repo:$CIRCLE_SHA1
               # Create task for docker deploy
               task_template='[
                 {
