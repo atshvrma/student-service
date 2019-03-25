@@ -18,7 +18,7 @@ jobs:
       - 
         run: 
           name: "login into aws"
-          command: "eval $(aws ecr get-login --registry-ids $AWS_ACCOUNT_ID --no-include-email --region us-east-2 | sed 's|https://||')"
+          command: "eval $(aws ecr get-login --registry-ids $AWS_ACCOUNT_ID --no-include-email --region $AWS_REGION | sed 's|https://||')"
       - run:
           name: install aws
           command: |
@@ -32,13 +32,13 @@ jobs:
         run:
           name: "docker push"
           command: |
-              docker build -t $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/student-service-repo:latest_1 ./
-              docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/student-service-repo
+              docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/student-service-repo:latest_1 ./
+              docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/student-service-repo
       -
         run:
           name:"docker run "
           command: |
-              docker run -d -p 8080:8080 --name student-service $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/student-service-repo
+              docker run -d -p 8080:8080 --name student-service $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/student-service-repo
               
     working_directory: ~/build
   deploy-dev: 
