@@ -15,10 +15,15 @@ jobs:
         run: 
           name: "maven build"
           command: "mvn -DskipTests clean install dependency:resolve-plugins dependency:go-offline"
-      -
-        run:
-          name:"authenticate aws"
-          command:"aws ecr get-login --region us-east-2"
+      - run:
+          name: install aws
+          command: |
+            curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+            unzip awscli-bundle.zip
+            sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+      - run:
+          name: "Log in to AWS ECR"
+          command: eval $(aws ecr get-login)
       -
         run:
           name: "docker push"
