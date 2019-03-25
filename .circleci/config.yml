@@ -34,11 +34,43 @@ jobs:
           command: |
               docker build -t $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/student-service-repo:latest_1 ./
               docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/student-service-repo
+      -
+        run:
+          name:"docker run "
+          command: |
+              docker run -d -p 8080:8080 --name student-service $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/student-service-repo
               
     working_directory: ~/build
+  deploy-dev: 
+    machine: true
+    steps: 
+      - 
+        checkout: 
+          path: $CIRCLE_PROJECT_REPONAME
+      - 
+        run: 
+          command: |
+              
+              kubectl apply -f /home/circleci/build/$CIRCLE_PROJECT_REPONAME/kube/dev/deployment/$CIRCLE_PROJECT_REPONAME.yml
+              kubectl set image deployment/$CIRCLE_PROJECT_REPONAME gd-deploy-image=gcr.io/${GCLOUD_PROJECT_ID}/$CIRCLE_PROJECT_REPONAME:$CIRCLE_SHA1
+              kubectl rollout status deployment/$CIRCLE_PROJECT_REPONAME
+          name: "Deploy to Dev"
+          shell: /bin/bash
+    working_directory: ~/build
+
+
 version: 2
 workflows: 
   version: 2
   build_and_deploy: 
     jobs: 
       - build
+      - 
+        deploy-dev-approval: 
+          requires: 
+            - build
+          type: approval
+      - 
+        deploy-dev: 
+          requires: 
+            - deploy-dev-approval
