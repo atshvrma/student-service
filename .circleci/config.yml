@@ -32,7 +32,7 @@ jobs:
         run:
           name: "docker push"
           command: |
-              docker build -t $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/student-service-repo:latest -t $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/student-service-repo ./
+              docker build -t $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/student-service-repo:latest_1 ./
               docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-2.amazonaws.com/student-service-repo
               
     working_directory: ~/build
