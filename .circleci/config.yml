@@ -22,7 +22,7 @@ jobs:
       -
         run:
           command: |
-              docker build -t 846069253880.dkr.ecr.us-east-2.amazonaws.com/student-service-repo:latest -t 846069253880.dkr.ecr.us-east-2.amazonaws.com/student-service-repo ."
+              docker build -t 846069253880.dkr.ecr.us-east-2.amazonaws.com/student-service-repo:latest -t 846069253880.dkr.ecr.us-east-2.amazonaws.com/student-service-repo .
               docker push 846069253880.dkr.ecr.us-east-2.amazonaws.com/student-service-repo:$CIRCLE_SHA1
 
 
