@@ -47,7 +47,7 @@ jobs:
                fi
               echo $TASK
               echo $SERVICE
-              aws configure set region $AWS_REGION
+              
               docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/student-service-repo:$CIRCLE_SHA1 ./
               docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/student-service-repo:$CIRCLE_SHA1
               # Login to AWS 
@@ -56,6 +56,7 @@ jobs:
               # docker tag app $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$DOCKER_IMAGE:$CIRCLE_SHA1
               # docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$DOCKER_IMAGE:$CIRCLE_SHA1
               # Create task for docker deploy
+              aws configure set region $AWS_REGION
               task_template='[
                 {
                   "name": "student-service-task-template",
