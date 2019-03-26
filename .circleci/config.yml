@@ -54,14 +54,14 @@ jobs:
               aws configure set region $AWS_REGION
               task_template='[
                 {
-                  "name": "student-service-task-template",
-                  "image": student-image,
+                  "name": "%s",
+                  "image": "%s.dkr.ecr.%s.amazonaws.com/%s:%s",
                   "essential": true,
                   "memoryReservation": 1000,
                   "portMappings": [
                     {
-                      "containerPort": 8080,
-                      "hostPort": 8080
+                      "containerPort": 3000,
+                      "hostPort": 80
                     }
                   ],
                   "environment" : [
