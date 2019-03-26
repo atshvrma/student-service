@@ -28,12 +28,12 @@ jobs:
             unzip awscli-bundle.zip
             sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
 
-      -
-        run:
-          name: "docker push"
-          command: |
-              docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/student-service-repo:latest_1 ./
-              docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/student-service-repo
+      # -
+      #   run:
+      #     name: "docker push"
+      #     command: |
+      #         docker build -t $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/student-service-repo:latest_1 ./
+      #         docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/student-service-repo
       -
         deploy:
           name: "docker push aws"
