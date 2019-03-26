@@ -59,7 +59,7 @@ jobs:
               task_template='[
                 {
                   "name": "student-service-task-template",
-                  "image": "$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$DOCKER_IMAGE:$CIRCLE_SHA1",
+                  "image": "$CIRCLE_SHA1",
                   "essential": true,
                   "memoryReservation": 1000,
                   "portMappings": [
