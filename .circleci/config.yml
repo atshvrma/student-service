@@ -75,9 +75,9 @@ jobs:
               # Register task definition
               json=$(aws ecs register-task-definition --container-definitions "$task_def" --family "$FAMILY")
               # Grab revision # using regular bash and grep
-              revision=$(echo "$json" | grep -o '"revision": [0-9]*' | grep -Eo '[0-9]+')
+              # revision=$(echo "$json" | grep -o '"revision": [0-9]*' | grep -Eo '[0-9]+')
               # Deploy revision
-              aws ecs update-service --cluster "$CLUSTER" --service "$SERVICE" --task-definition "$TASK":"$revision"
+              aws ecs update-service --cluster "$CLUSTER" --service "$SERVICE" --task-definition "$TASK":"123"
               fi  
 
 
